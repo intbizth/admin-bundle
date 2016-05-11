@@ -39,6 +39,12 @@ services:
         tags:
             - { name: sylius.grid_field, type: 'text' }
 
+    intbizth_admin.grid.field_type.xtemplate:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\XTemplate
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'xtemplate' }
+
     intbizth_admin.twig.country_name:
         class: Intbizth\Bundle\AdminBundle\Twig\CountryNameExtension
         tags:
