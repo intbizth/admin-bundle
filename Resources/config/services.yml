@@ -1,6 +1,6 @@
 services:
     intbizth_admin.controller.dassboard:
-        class: Sylius\Bundle\AdminBundle\Controller\DashboardController
+        class: Intbizth\Bundle\AdminBundle\Controller\DashboardController
         arguments: [ "@templating" ]
 
     intbizth_admin.grid.driver:
