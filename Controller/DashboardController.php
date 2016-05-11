@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\AdminBundle\Controller;
+namespace Intbizth\Bundle\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
