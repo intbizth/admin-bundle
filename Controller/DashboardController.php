@@ -3,7 +3,6 @@
 namespace Intbizth\Bundle\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController
@@ -22,12 +21,10 @@ class DashboardController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return $this->templatingEngine->renderResponse('admin:Dashboard:index.html.twig');
+        return $this->templatingEngine->renderResponse('IntbizthAdminBundle:Dashboard:index.html.twig');
     }
 }
