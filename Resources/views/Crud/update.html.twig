@@ -17,7 +17,7 @@
     {{ parent() }}
 {% endblock %}
 
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+{% form_theme form 'IntbizthAdminBundle::form.html.twig' %}
 
 {% block content %}
     {{ form_start(form, {'action': path(configuration.getRouteName('update'), {'id': resource.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
