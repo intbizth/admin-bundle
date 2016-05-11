@@ -38,3 +38,8 @@ services:
         arguments: ["@sylius.grid.data_extractor", "@twig"]
         tags:
             - { name: sylius.grid_field, type: 'text' }
+
+    intbizth_admin.twig.country_name:
+        class: Intbizth\Bundle\AdminBundle\Twig\CountryNameExtension
+        tags:
+            - { name: twig.extension }
