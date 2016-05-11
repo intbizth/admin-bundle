@@ -28,6 +28,6 @@ class DashboardController
      */
     public function indexAction(Request $request)
     {
-        return $this->templatingEngine->renderResponse('IntbizthAdminBundle:Dashboard:index.html.twig');
+        return $this->templatingEngine->renderResponse('admin:Dashboard:index.html.twig');
     }
 }
