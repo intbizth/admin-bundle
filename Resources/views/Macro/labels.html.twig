@@ -1,0 +1,49 @@
+{% macro status(status) %}
+    {% import _self as labels %}
+
+    {% if status %}
+        {{ labels.enabled() }}
+    {% else %}
+        {{ labels.disabled() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro enabled() %}
+    <span class="ui teal label">
+        <i class="checkmark icon"></i>
+        {{ 'Enabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro disabled() %}
+    <span class="ui red label">
+        <i class="remove icon"></i>
+        {{ 'Disabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro yesno(status) %}
+    {% import _self as labels %}
+
+    {% if status %}
+        {{ labels.yes() }}
+    {% else %}
+        {{ labels.no() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro yes() %}
+    <span class="ui green label">
+        {{ 'Yes'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro no() %}
+    <span class="ui red label">
+        {{ 'No'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro label(text, color) %}
+    <span class="ui {{ color|default() }} label">{{ text|raw }}</span>
+{% endmacro %}
