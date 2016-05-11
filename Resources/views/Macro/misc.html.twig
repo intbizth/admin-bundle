@@ -1,0 +1,49 @@
+{% macro shipment_state(state) %}
+    {% if state == 'pending' %}
+        {% set class = 'red' %}
+    {% elseif state == 'dispatched' %}
+        {% set class = 'teal' %}
+    {% elseif state == 'returned' %}
+        {% set class = 'yellow' %}
+    {% else %}
+        {% set class = 'green' %}
+    {% endif %}
+
+    <span class="ui {{ class }} label label-state">{{ state|trans|humanize }}</span>
+{% endmacro %}
+
+{% macro state_label(state, type) %}
+    {% if type == 'payment' %}
+        {% set label = 'sylius.payment.state.'~state %}
+        {% if state is same as('completed') %}
+            {% set class = 'green' %}
+        {% elseif state in ['checkout', 'processing', 'new'] %}
+            {% set class = 'blue' %}
+        {% else %}
+            {% set class = 'red' %}
+        {% endif %}
+    {% elseif type == 'order' %}
+        {% if state is same as(1) %}
+            {% set label = 'sylius.order.state.checkout' %}
+            {% set class = 'yellow' %}
+        {% elseif state is same as(2) %}
+            {% set label = 'sylius.order.state.cart_locked' %}
+            {% set class = 'grey' %}
+        {% elseif state is same as(3) %}
+            {% set label = 'sylius.order.state.ordered' %}
+            {% set class = 'black' %}
+        {% else %}
+            {% set label = 'sylius.order.state.order_confimed' %}
+            {% set class = 'green' %}
+        {% endif %}
+    {% else %}
+        {% if state %}
+            {% set label = 'sylius.ui.yes' %}
+            {% set class = 'green' %}
+        {% else %}
+            {% set label = 'sylius.ui.no' %}
+            {% set class = 'red' %}
+        {% endif %}
+    {% endif %}
+    <span class="ui {{ class }} label">{{ label|trans|upper }}</span>
+{% endmacro %}

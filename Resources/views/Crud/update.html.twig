@@ -1,0 +1,46 @@
+{% extends 'IntbizthAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block javascripts %}
+    {% if configuration.vars.html_editor|default(false) %}
+        <script src="{{ asset('assets/admin/tinymce.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/ace.js') }}"></script>
+    {% endif %}
+    {% if configuration.vars.ace_editor|default(false) %}
+        <script src="{{ asset('assets/admin/ace.js') }}"></script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% block content %}
+    {{ form_start(form, {'action': path(configuration.getRouteName('update'), {'id': resource.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+
+    <div class="ui stackable two column grid page-header">
+        <div class="column">
+            {{ headers.default(header|trans, configuration.vars.icon|default('pencil'), configuration.vars.subheader|default(null)|trans) }}
+        </div>
+        <div class="middle aligned column">
+            <div class="ui right floated buttons">
+                {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="ui segment">
+        <input type="hidden" name="_method" value="PUT" />
+        {% if configuration.vars.templates.form is defined %}
+            {% include configuration.vars.templates.form %}
+        {% else %}
+            {{ form_widget(form) }}
+        {% endif %}
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

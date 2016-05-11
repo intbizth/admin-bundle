@@ -1,0 +1,26 @@
+{% extends 'IntbizthAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.show_'~metadata.name) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block content %}
+    <div class="ui stackable two column grid page-header">
+        <div class="column">
+            {{ headers.default(header|trans, configuration.vars.icon|default('file text outline icon'), configuration.vars.subheader|default(null)|trans) }}
+        </div>
+        <div class="middle aligned column">
+            <div class="ui right floated buttons">
+                {% include 'IntbizthAdminBundle:Crud:_showActions.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="ui basic segment">
+        {% if configuration.vars.templates.show is defined %}
+            {% include configuration.vars.templates.show %}
+        {% endif %}
+    </div>
+{% endblock %}

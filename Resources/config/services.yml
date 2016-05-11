@@ -1,0 +1,40 @@
+services:
+    intbizth_admin.controller.dassboard:
+        class: Sylius\Bundle\AdminBundle\Controller\DashboardController
+        arguments: [ "@templating" ]
+
+    intbizth_admin.grid.driver:
+        class: Intbizth\Bundle\AdminBundle\Grid\Driver\ORM\CustomDriver
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: sylius.grid_driver, alias: 'doctrine/orm-custom' }
+
+    intbizth_admin.grid.field_type.counter:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\Counter
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'counter' }
+
+    intbizth_admin.grid.field_type.datetime:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\LocalizedDate
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'localizeddate' }
+
+    intbizth_admin.grid.field_type.yesno:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\YesNo
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'yesno' }
+
+    intbizth_admin.grid.field_type.country:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\Country
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'country' }
+
+    intbizth_admin.grid.field_type.text:
+        class: Intbizth\Bundle\AdminBundle\Grid\Field\Text
+        arguments: ["@sylius.grid.data_extractor", "@twig"]
+        tags:
+            - { name: sylius.grid_field, type: 'text' }

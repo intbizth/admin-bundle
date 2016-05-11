@@ -1,0 +1,107 @@
+{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% if definition.filters|length > 0 %}
+    <div class="ui basic segment">
+        <form method="get" action="{{ path(grid.requestConfiguration.getRouteName('index')) }}" class="ui form">
+            <div class="two fields">
+                {% for filter in definition.filters %}
+                {{ sylius_grid_render_filter(grid, filter) }}
+
+                {% if loop.index0 % 2 %}
+            </div>
+            <div class="two fields">
+                {% endif %}
+                {% endfor %}
+            </div>
+            {{ buttons.filter() }}
+            {{ buttons.resetFilters(path(grid.requestConfiguration.getRouteName('index'))) }}
+        </form>
+    </div>
+{% endif %}
+
+{% if data|length %}
+    <table class="ui celled table tablet stackable">
+        <thead>
+        <tr>
+            {% for field in definition.fields %}
+                {% set flex = '' %}
+                {% set align = '' %}
+                {% set sorted = '' %}
+
+                {% if field.options.flex is defined %}
+                    {% set flex = ' flex-' ~ field.options.flex %}
+                {% endif %}
+
+                {% if field.options.align is defined %}
+                    {% set align = ' align ' ~ field.options.align %}
+                {% endif %}
+
+                {% if grid.isSortedBy(field.name) %}
+                    {% set sorted = ' sorted ' ~ ('asc' == grid.getSortingOrder(field.name) ? 'ascending' : 'descending') %}
+                {% endif %}
+
+                <th class="{{ (flex ~ align ~ sorted)|trim }}">
+                    {% if grid.isSortedBy(field.name) %}
+                        {{ sylius_resource_sort(field.name,field.label|trans) }}
+                    {% else %}
+                        {{ field.label|trans }}
+                    {% endif %}
+                </th>
+            {% endfor %}
+            {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                <th class="action col"></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+            <tr>
+                {% for field in definition.fields %}
+                    {% set flex = '' %}
+                    {% set align = '' %}
+
+                    {% if field.options.flex is defined %}
+                        {% set flex = ' flex-' ~ field.options.flex %}
+                    {% endif %}
+
+                    {% if field.options.align is defined %}
+                        {% set align = ' align ' ~ field.options.align %}
+                    {% endif %}
+
+                    <td class="{{ (flex ~ align)|trim }}">{{ sylius_grid_render_field(grid, field, row) }}</td>
+                {% endfor %}
+                {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                    <td class="action col">
+                        <div class="ui icon top right pointing dropdown button">
+                            <i class="setting icon"></i>
+                            <div class="menu">
+                                {% for action in definition.getActions('item') %}
+                                    {% if sylius_is_granted(grid.metadata.applicationName ~ '.'~ grid.metadata.name ~'.'~action.name) %}
+                                        {{ sylius_grid_render_action(grid, action, row) }}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        {% if data.getNbPages() > 1 %}
+            <tfoot>
+            <tr>
+                <th colspan="{{ (definition.fields|length) + 1 }}">
+                    {{ pagination.render(data) }}
+                </th>
+            </tr>
+            </tfoot>
+        {% endif %}
+    </table>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+{% endif %}

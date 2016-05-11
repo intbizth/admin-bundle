@@ -1,0 +1,3 @@
+{% import 'IntbizthAdminBundle:Macro:menus.html.twig' as menus %}
+
+{{ menus.edit(path(grid.requestConfiguration.getRouteName('update'), {'id': data.id})) }}

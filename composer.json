@@ -1,0 +1,37 @@
+{
+    "name": "intbizth/admin-bundle",
+    "type": "symfony-bundle",
+    "description": "AdminBundle for Using SyliusGridBundle",
+    "keywords": ["admin"],
+    "homepage": "http://intbizth.com",
+    "license": "INTBIZTH",
+    "authors": [
+        {
+            "name": "Ishmael",
+            "email": "phaiboon@intbizth.com",
+            "homepage": "http://intbizth.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "sylius/grid": "^0.18",
+        "sylius/grid-bundle": "^0.18",
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Intbizth\\Bundle\\AdminBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Intbizth\\Bundle\\AdminBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.18-dev"
+        }
+    }
+}

@@ -1,0 +1,3 @@
+{% import 'IntbizthAdminBundle:Macro:menus.html.twig' as menus %}
+
+{{ menus.delete(path(grid.requestConfiguration.getRouteName('delete'), {'id': data.id})) }}

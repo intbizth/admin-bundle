@@ -1,0 +1,9 @@
+<div class="ui buttons">
+    <a class="ui big button" href="{{ path(configuration.getRouteName('index')) }}">
+        {{ 'sylius.ui.back'|trans }}
+    </a>
+    <div class="or"></div>
+    <a class="ui big positive button" href="{{ path(configuration.getRouteName('update'), {id: resource.id}) }}">
+        {{ 'sylius.ui.edit'|trans }}
+    </a>
+</div>
