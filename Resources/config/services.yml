@@ -1,5 +1,5 @@
 services:
-    intbizth_admin.controller.dassboard:
+    intbizth_admin.controller.dashboard:
         class: Intbizth\Bundle\AdminBundle\Controller\DashboardController
         arguments: [ "@templating" ]
 
