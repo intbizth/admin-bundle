@@ -1,0 +1,5 @@
+intbizth_admin_permissions:
+    resource: permission.yml
+
+intbizth_admin_roles:
+    resource: role.yml

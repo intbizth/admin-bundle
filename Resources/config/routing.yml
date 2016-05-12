@@ -1,0 +1,20 @@
+intbizth_admin_root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: intbizth_admin_dashboard
+        permanent: true
+
+intbizth_admin_dashboard:
+    path: /dashboard
+    defaults:
+        _controller: intbizth_admin.controller.dashboard:indexAction
+
+intbizth_admin_security:
+    resource: routings/security.yml
+
+intbizth_admin_users:
+    resource: routings/user/main.yml
+
+intbizth_admin_rbacs:
+    resource: routings/rbac/main.yml

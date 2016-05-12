@@ -1,0 +1,4 @@
+imports:
+    - { resource: permission.yml }
+    - { resource: role.yml }
+

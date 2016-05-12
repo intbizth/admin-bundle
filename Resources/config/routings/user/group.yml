@@ -1,0 +1,17 @@
+intbizth_admin_group:
+    type: sylius.resource
+    resource: |
+        alias: sylius.group
+        section: admin
+        templates: IntbizthAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: grid_admin_group
+        vars:
+            all:
+                subheader: "Manage groups"
+                templates:
+                    form: admin:Group:form.html.twig
+            index:
+                header: sylius.ui.groups
+                icon: tags

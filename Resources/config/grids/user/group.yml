@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        grid_admin_group:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.group.class%
+            sorting:
+                id: asc
+                name: asc
+
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        flex: 1
+
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

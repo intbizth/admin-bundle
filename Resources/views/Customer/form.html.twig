@@ -1,0 +1,61 @@
+<div class="ui grid stackable column">
+    <div class="ten wide column">
+        <div class="two fields">
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+        </div>
+        <div class="two fields">
+            {{ form_row(form.gender) }}
+            {{ form_row(form.birthday) }}
+        </div>
+        <div class="two fields">
+            {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.mobile) }}
+        </div>
+        {{ form_row(form.groups) }}
+    </div>
+
+    <div class="six wide column">
+        {{ form_row(form.email) }}
+
+        {% if form.user.vars.data.id is not defined %}
+            {{ form_row(form.user.plainPassword) }}
+        {% endif %}
+        {{ form_row(form.user.locale) }}
+        {{ form_row(form.user.enabled) }}
+
+        {% set roles = form.user.authorizationRoles %}
+
+        <div class="field">{{ form_label(roles) }}</div>
+
+        {% set level = 0 %}
+
+        {{ '<ul class="tree-list">'|raw }}
+
+        {% for field in roles %}
+            {% set choice = roles.vars.choices[field.vars.value] %}
+            {% set currentLevel = choice.data.level %}
+
+            {% if currentLevel != level %}
+                {{ ('</li></ul><ul class="tree-list" style="margin-left: ' ~ currentLevel * 20 ~'px"><li>')|raw }}
+                {% set level = currentLevel %}
+            {% else %}
+                {{ '<li>'|raw }}
+            {% endif %}
+
+            {{ form_widget(field) }}
+
+            {% if choice.data.code == 'root' %}
+                {{ 'Root' }}
+            {% else %}
+                {{ choice.data.description }}
+            {% endif %}
+
+            {{ '</li>'|raw }}
+        {% endfor %}
+
+        {{ '</ul>'|raw }}
+    </div>
+</div>
+
+{{ form_row(form._token) }}

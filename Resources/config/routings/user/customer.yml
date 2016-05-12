@@ -1,0 +1,17 @@
+intbizth_admin_customer:
+    type: sylius.resource
+    resource: |
+        alias: sylius.customer
+        section: admin
+        templates: IntbizthAdminBundle:Crud
+        redirect: update
+        grid: grid_admin_customer
+        vars:
+            all:
+                subheader: "Manage customers"
+                templates:
+                    form: IntbizthAdminBundle:Customer:form.html.twig
+                    show: IntbizthAdminBundle:Customer:show.html.twig
+            index:
+                header: sylius.ui.customers
+                icon: tags

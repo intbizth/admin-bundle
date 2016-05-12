@@ -1,0 +1,32 @@
+sylius_grid:
+    grids:
+        grid_admin_permission:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.permission.class%
+
+            sorting:
+                left: asc
+
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                description:
+                    type: xtemplate
+                    label: sylius.ui.description
+                    path: .
+                    options:
+                        tpl: '<span style="padding-left:{{ data.level*20 }}px">{{ data.description }}</span>'
+                        flex: 1
+
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

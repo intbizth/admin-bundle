@@ -1,0 +1,14 @@
+intbizth_admin_login:
+    path: /login
+    defaults:
+        _controller: sylius.controller.security:loginAction
+        _sylius:
+            template: IntbizthAdminBundle:Security:login.html.twig
+
+intbizth_admin_login_check:
+    path: /login-check
+    defaults:
+        _controller: sylius.controller.security:checkAction
+
+intbizth_admin_logout:
+    path: /logout

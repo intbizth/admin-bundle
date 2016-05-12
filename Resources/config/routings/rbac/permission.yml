@@ -1,0 +1,16 @@
+intbizth_admin_permission:
+    type: sylius.resource
+    resource: |
+        alias: sylius.permission
+        section: admin
+        templates: IntbizthAdminBundle:Crud
+        redirect: update
+        grid: grid_admin_permission
+        vars:
+            all:
+                subheader: "Manage permissions"
+                templates:
+                    form: IntbizthAdminBundle:Permission:form.html.twig
+            index:
+                header: sylius.ui.permissions
+                icon: tags

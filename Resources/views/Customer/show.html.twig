@@ -1,0 +1,127 @@
+{% from 'admin:Macros:misc.html.twig' import state_label %}
+
+{% block content %}
+    {% set customer = resource %}
+    <div class="ui grid">
+        <div class="ten wide column">
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.customer.general_info'|trans({'%fullName%': customer.fullName}) }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.ui.id'|trans }}</strong></td>
+                    <td>{{ customer.id }}</td>
+                </tr>
+                {% if customer.firstName %}
+                    <tr>
+                        <td><strong>{{ 'sylius.ui.first_name'|trans }}</strong></td>
+                        <td>{{ customer.firstName }}</td>
+                    </tr>
+                {% endif %}
+                {% if customer.lastName %}
+                    <tr>
+                        <td><strong>{{ 'sylius.ui.last_name'|trans }}</strong></td>
+                        <td>{{ customer.lastName }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>{{ 'sylius.ui.username'|trans }}</strong></td>
+                    <td id="username">
+                        {% if customer.user is not null %}
+                            {{ customer.user.username }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.ui.email'|trans }}</strong></td>
+                    <td>{{ customer.email }}</td>
+                </tr>
+                {% if customer.phoneNumber is not null %}
+                    <tr>
+                        <td><strong>{{ 'sylius.ui.phone_number'|trans }}</strong></td>
+                        <td>{{ customer.phoneNumber }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>{{ 'sylius.ui.enabled'|trans }}</strong></td>
+                    <td id="enabled">
+                        {% if customer.user is not null %}
+                            {{ state_label(customer.user.enabled) }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if customer.user is not null and customer.user.lastLogin %}
+                    <tr>
+                        <td><strong>{{ 'sylius.ui.last_login'|trans }}</strong></td>
+                        <td>{{ customer.user.lastLogin|date }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>{{ 'sylius.ui.groups'|trans }}</strong></td>
+                    <td>
+                        {% if customer.groups|length > 0 %}
+                            <ul>
+                                {% for group in customer.groups %}
+                                    <li>{{ group.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="ui teal label">
+                            <i class="list layout icon"></i> {{ 'sylius.customer.no_groups'|trans }}
+                        </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="six wide column">
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>{{ 'sylius.ui.oauth_provider'|trans }}</th>
+                    <th>{{ 'sylius.ui.identifier'|trans }}</th>
+                    <th>{{ 'sylius.ui.access_token'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if customer.user is not null %}
+                    {% for oauth in customer.user.oauthAccounts %}
+                        <tr>
+                            <td>{{ oauth.provider }}</td>
+                            <td>{{ oauth.identifier }}</td>
+                            <td>{{ oauth.accessToken|default('<em>unknown</em>')|raw }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">{{ 'sylius.user.oauth.none'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="ui grid">
+        {% if customer.shippingAddress %}
+            <div class="eight wide column">
+                <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
+                {% include 'admin:Address:_show.html.twig' with {'address': customer.shippingAddress } %}
+            </div>
+        {% endif %}
+        {% if customer.billingAddress %}
+            <div class="eight wide column">
+                <h4>{{ 'sylius.ui.billing_address'|trans }}</h4>
+                {% include 'admin:Address:_show.html.twig' with {'address': customer.billingAddress } %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% render(url('sylius_admin_order_by_customer', app.request.query.all|merge({id: customer.id}) )) %}
+
+{% endblock %}

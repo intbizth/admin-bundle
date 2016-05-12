@@ -1,0 +1,17 @@
+intbizth_admin_role:
+    type: sylius.resource
+    resource: |
+        alias: sylius.role
+        section: admin
+        templates: IntbizthAdminBundle:Crud
+        except: ['show']
+        redirect: index
+        grid: grid_admin_role
+        vars:
+            all:
+                subheader: "Manage roles"
+                templates:
+                    form: IntbizthAdminBundle:Role:form.html.twig
+            index:
+                header: sylius.ui.roles
+                icon: tags

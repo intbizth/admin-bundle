@@ -1,0 +1,10 @@
+{{ form_errors(form) }}
+
+{% if form.parent is not null %}
+    {{ form_row(form.parent) }}
+{% endif %}
+
+{{ form_row(form.code) }}
+{{ form_row(form.description) }}
+
+{{ form_widget(form._token) }}

@@ -1,0 +1,43 @@
+{{ form_errors(form) }}
+
+<div class="ui grid stackable column">
+    <div class="six wide column">
+        {% if form.parent is not null %}
+            {{ form_row(form.parent) }}
+        {% endif %}
+
+        {{ form_row(form.code) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+
+        {% for securityRoleForm in form.securityRoles %}
+            {{ form_row(securityRoleForm) }}
+        {% endfor %}
+    </div>
+
+    <div class="ten wide column">
+        <div class="field">{{ form_label(form.permissions) }}</div>
+
+        {% set level = 0 %}
+
+        {{ '<ul class="tree-list">'|raw }}
+
+        {% for field in form.permissions %}
+            {% set currentLevel = form.permissions.vars.choices[field.vars.value].data.level %}
+
+            {% if currentLevel != level %}
+                {{ ('</li></ul><ul style="margin-left: ' ~ currentLevel * 20 ~'px"><li>')|raw }}
+                {% set level = currentLevel %}
+            {% else %}
+                {{ '<li>'|raw }}
+            {% endif %}
+
+            {{ form_widget(field) }}
+            {{ form.permissions.vars.choices[field.vars.value].data.description }}
+            {{ '</li>'|raw }}
+        {% endfor %}
+
+        {{ '</ul>'|raw }}
+    </div>
+</div>
+{{ form_widget(form._token) }}

@@ -1,0 +1,4 @@
+imports:
+    - { resource: customer.yml }
+    - { resource: group.yml }
+

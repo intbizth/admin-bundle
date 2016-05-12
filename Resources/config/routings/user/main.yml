@@ -1,0 +1,5 @@
+intbizth_admin_customers:
+    resource: customer.yml
+
+intbizth_admin_groups:
+    resource: group.yml
