@@ -49,5 +49,24 @@ class IntbizthAdminExtension extends Extension implements PrependExtensionInterf
                 ),
             )
         ));
+
+        $container->prependExtensionConfig('sylius_rbac', array(
+            'resources' => array(
+                'permission' => array(
+                    'classes' => array(
+                        'form' => array(
+                            'choice' => 'Intbizth\Bundle\AdminBundle\Form\Type\TreeResourceChoiceType'
+                        )
+                    ),
+                ),
+                'role' => array(
+                    'classes' => array(
+                        'form' => array(
+                            'choice' => 'Intbizth\Bundle\AdminBundle\Form\Type\TreeResourceChoiceType'
+                        )
+                    ),
+                ),
+            )
+        ));
     }
 }
