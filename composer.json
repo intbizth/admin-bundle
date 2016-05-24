@@ -15,9 +15,9 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/grid": "^0.18",
-        "sylius/grid-bundle": "^0.18",
-        "sylius/ui-bundle": "^0.18"
+        "sylius/grid": "0.19.*",
+        "sylius/grid-bundle": "0.19.*",
+        "sylius/ui-bundle": "0.19.*"
     },
     "config": {
         "bin-dir": "bin"
@@ -32,7 +32,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.18-dev"
+            "dev-master": "0.19-dev"
         }
     }
 }
