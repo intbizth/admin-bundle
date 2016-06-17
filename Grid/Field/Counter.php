@@ -5,6 +5,7 @@ namespace Intbizth\Bundle\AdminBundle\Grid\Field;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Counter implements FieldTypeInterface
 {
@@ -27,7 +28,7 @@ class Counter implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(Field $field, $data)
+    public function render(Field $field, $data, array $options)
     {
         if ('.' !== $field->getPath()) {
             $data = $this->dataExtractor->get($field, $data);
@@ -62,6 +63,13 @@ class Counter implements FieldTypeInterface
         } else {
             return $default;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver) {
+
     }
 
     /**

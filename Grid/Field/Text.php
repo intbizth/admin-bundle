@@ -5,6 +5,7 @@ namespace Intbizth\Bundle\AdminBundle\Grid\Field;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Text implements FieldTypeInterface
 {
@@ -27,7 +28,7 @@ class Text implements FieldTypeInterface
      *
      * @return string
      */
-    public function render(Field $field, $data)
+    public function render(Field $field, $data, array $options)
     {
         $data = $this->dataExtractor->get($field, $data);
 
@@ -56,6 +57,13 @@ class Text implements FieldTypeInterface
         } else {
             return $default;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver) {
+
     }
 
     /**
