@@ -1,0 +1,40 @@
+{% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
+
+{% block title %}Intbizth | {% endblock %}
+
+{% block stylesheets %}
+    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+{% endblock %}
+
+{% block topbar %}
+    <a class="icon item" id="sidebar-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+    <a class="item" href="{{ path('intbizth_admin_dashboard') }}">
+        <strong>Intbizth Admin</strong>
+    </a>
+    <div class="ui right floated simple dropdown item">
+        <img class="ui avatar image" src="{{ asset('assets/admin/img/avatar.png') }}">
+        <span>{{ app.user.username }}</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a href="{{ path('intbizth_admin_logout') }}" class="item">
+                <i class="sign out icon"></i>
+                {{ 'Logout'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <a class="item" href="{{ path('intbizth_admin_dashboard') }}"><strong>{{ "Menus"|trans }}</strong></a>
+    {{ knp_menu_render('intbizth.amdin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
+{% endblock %}
+
+{% block footer %}
+    {{ 'sylius.ui.powered_by'|trans }} <a href="http://gitbub.com/intbizth" target="_blank">Intbizth Admin</a>.
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+{% endblock %}
