@@ -1,4 +1,19 @@
 services:
+    intbizth_admin.menu_builder.admin.main:
+        class: Intbizth\Bundle\AdminBundle\Menu\MainMenuBuilder
+        parent: sylius.menu_builder
+        arguments:
+            - "@sylius.authorization_checker"
+
+    intbizth_admin.menu.admin.main:
+        class: Knp\Menu\MenuItem
+        factory: [ "@intbizth_admin.menu_builder.admin.main", createMenu ]
+        scope: request
+        arguments:
+            - "@request"
+        tags:
+            - { name: knp_menu.menu, alias: intbizth.amdin.main }
+
     intbizth_admin.controller.dashboard:
         class: Intbizth\Bundle\AdminBundle\Controller\DashboardController
         arguments: [ "@templating" ]
