@@ -18,6 +18,12 @@
         "jms/serializer-bundle": "^0.13|^1.0",
         "knplabs/knp-menu-bundle": "~1.1",
         "liip/imagine-bundle": "~1.0",
+        "webmozart/assert": "^1.0",
+        "white-october/pagerfanta-bundle": "~1.0",
+        "willdurand/hateoas-bundle": "^0.4|^1.0",
+        "winzou/state-machine-bundle": "~0.2",
+        "zendframework/zend-hydrator": "^1.0|^2.0",
+        "zendframework/zend-stdlib": "^2.0|^3.0",
 
         "sylius/registry": "0.19.*",
         "sylius/storage": "0.19.*",
